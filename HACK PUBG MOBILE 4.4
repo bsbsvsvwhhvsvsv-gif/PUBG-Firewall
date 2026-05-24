@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAMZA - ببجي مهكرة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff6b35;
+            --secondary: #f7931e;
+            --accent: #ff4757;
+            --dark: #0a0a0f;
+            --darker: #050508;
+            --card: #12121a;
+            --card-hover: #1a1a25;
+            --text: #e8e8e8;
+            --text-muted: #888;
+            --gold: #ffd700;
+            --gold-dark: #b8860b;
+            --success: #00d26a;
+            --warning: #ffaa00;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(255,107,53,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(255,71,87,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(247,147,30,0.05) 0%, transparent 70%);
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+        }
+
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .logo-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255,107,53,0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+            50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.3; }
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+            text-shadow: none;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        .tagline {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 25px;
+            background: linear-gradient(135deg, rgba(255,107,53,0.2), rgba(255,71,87,0.2));
+            border: 1px solid rgba(255,107,53,0.3);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            animation: glow-border 3s infinite;
+        }
+
+        @keyframes glow-border {
+            0%, 100% { box-shadow: 0 0 10px rgba(255,107,53,0.3); }
+            50% { box-shadow: 0 0 25px rgba(255,107,53,0.6), 0 0 40px rgba(255,71,87,0.3); }
+        }
+
+        /* Instagram Link */
+        .insta-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #833ab4, #fd1d1d, #f77737);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(131,58,180,0.3);
+        }
+
+        .insta-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(131,58,180,0.5);
+        }
+
+        .insta-link i {
+            font-size: 1.3rem;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text);
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        /* Card Base */
+        .version-card {
+            background: var(--card);
+            border-radius: 24px;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+        }
+
+        .version-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .version-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255,107,53,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(255,107,53,0.1);
+        }
+
+        /* VIP Card Special */
+        .vip-card {
+            background: linear-gradient(135deg, #1a0a00 0%, #0d0d15 100%);
+            border: 1px solid rgba(255,215,0,0.2);
+        }
+
+        .vip-card::before {
+            background: linear-gradient(90deg, var(--gold), var(--gold-dark), var(--gold));
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .vip-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .normal-card .card-icon {
+            color: var(--primary);
+        }
+
+        .vip-card .card-icon {
+            color: var(--gold);
+            filter: drop-shadow(0 0 10px rgba(255,215,0,0.5));
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .normal-card .card-title {
+            color: var(--primary);
+        }
+
+        .vip-card .card-title {
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(255,215,0,0.3);
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        /* Features List */
+        .features-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            color: var(--text);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list li i {
+            color: var(--success);
+            font-size: 0.9rem;
+        }
+
+        .vip-card .features-list li i {
+            color: var(--gold);
+        }
+
+        /* Download Button */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 16px 30px;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Tajawal', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .normal-card .download-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 5px 20px rgba(255,107,53,0.3);
+        }
+
+        .normal-card .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255,107,53,0.5);
+        }
+
+        .vip-card .download-btn {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--dark);
+            box-shadow: 0 5px 20px rgba(255,215,0,0.3);
+        }
+
+        .vip-card .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255,215,0,0.5);
+        }
+
+        .download-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255,255,255,0.1) 50%,
+                transparent 70%
+            );
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, rgba(255,170,0,0.1), rgba(255,107,53,0.1));
+            border: 1px solid rgba(255,170,0,0.3);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .warning-box i {
+            color: var(--warning);
+            font-size: 1.5rem;
+            margin-top: 3px;
+        }
+
+        .warning-box p {
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .warning-box strong {
+            color: var(--warning);
+        }
+
+        /* VIP Exclusive Badge */
+        .exclusive-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,215,0,0.1);
+            border: 1px solid rgba(255,215,0,0.3);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--card);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(255,107,53,0.2);
+            position: relative;
+            animation: modalIn 0.4s ease;
+        }
+
+        @keyframes modalIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .modal h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .modal p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            flex-direction: column;
+        }
+
+        .modal-btn {
+            padding: 14px 30px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Tajawal', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .modal-btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255,107,53,0.4);
+        }
+
+        .modal-btn-secondary {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .modal-btn-secondary:hover {
+            border-color: rgba(255,255,255,0.3);
+            color: var(--text);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255,71,87,0.2);
+            color: var(--accent);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 40px;
+        }
+
+        .footer .heart {
+            color: var(--accent);
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo { font-size: 2.5rem; }
+            .cards-grid { grid-template-columns: 1fr; gap: 20px; }
+            .version-card { padding: 30px 20px; }
+            .modal { padding: 30px 20px; }
+        }
+
+        /* Entrance Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .fade-in-delay-1 { animation-delay: 0.2s; }
+        .fade-in-delay-2 { animation-delay: 0.4s; }
+        .fade-in-delay-3 { animation-delay: 0.6s; }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Glitch Effect for Title */
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            animation: glitch-1 2s infinite;
+            color: var(--accent);
+            z-index: -1;
+        }
+
+        .glitch::after {
+            animation: glitch-2 2s infinite;
+            color: var(--secondary);
+            z-index: -2;
+        }
+
+        @keyframes glitch-1 {
+            0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+            20% { clip-path: inset(20% 0 60% 0); transform: translate(-3px, 3px); }
+            40% { clip-path: inset(40% 0 40% 0); transform: translate(3px, -3px); }
+            60% { clip-path: inset(60% 0 20% 0); transform: translate(-3px, 3px); }
+            80% { clip-path: inset(80% 0 0% 0); transform: translate(3px, -3px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+            20% { clip-path: inset(60% 0 20% 0); transform: translate(3px, -3px); }
+            40% { clip-path: inset(40% 0 40% 0); transform: translate(-3px, 3px); }
+            60% { clip-path: inset(20% 0 60% 0); transform: translate(3px, -3px); }
+            80% { clip-path: inset(0% 0 80% 0); transform: translate(-3px, 3px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header fade-in">
+        <div class="logo-container">
+            <div class="logo-glow"></div>
+            <h1 class="logo glitch" data-text="HAMZA">HAMZA</h1>
+        </div>
+        <p class="subtitle">عالم ببجي المهكرة</p>
+        <div class="tagline">🔥 اختر نسختك وانطلق في المعركة</div>
+        
+        <a href="https://www.instagram.com/txyit?igsh=MTVtODU0ZTQ0bGlxbg==" target="_blank" class="insta-link fade-in fade-in-delay-1">
+            <i class="fab fa-instagram"></i>
+            <span>@TXYIT</span>
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="section-title fade-in fade-in-delay-2">
+            <h2>اختر نسختك</h2>
+        </div>
+
+        <div class="cards-grid">
+            <!-- Normal Version Card -->
+            <div class="version-card normal-card fade-in fade-in-delay-2" onclick="openNormalModal()">
+                <i class="fas fa-gamepad card-icon"></i>
+                <h3 class="card-title">النسخة العادية</h3>
+                <p class="card-desc">
+                    النسخة المثالية للمبتدئين والمحترفين على حد سواء. استمتع بتجربة لعب سلسة ومميزات قوية تمنحك الأفضلية في ساحة المعركة.
+                </p>
+                
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> مميزات أساسية قوية</li>
+                    <li><i class="fas fa-check-circle"></i> أداء مستقر وسلس</li>
+                    <li><i class="fas fa-check-circle"></i> تحديثات دورية</li>
+                    <li><i class="fas fa-check-circle"></i> سهولة التثبيت</li>
+                </ul>
+
+                <button class="download-btn">
+                    <i class="fas fa-download"></i>
+                    تحميل النسخة العادية
+                </button>
+
+                <div class="warning-box">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>
+                        <strong>تنبيه:</strong> هذه النسخة آمنة وموثوقة. ننصحك باللعب بذكاء وتجنب التصرفات المشبوهة لضمان استمرارية حسابك.
+                    </p>
+                </div>
+            </div>
+
+            <!-- VIP Version Card -->
+            <div class="version-card vip-card fade-in fade-in-delay-3" onclick="openVipModal()">
+                <span class="vip-badge">VIP</span>
+                <i class="fas fa-crown card-icon"></i>
+                <h3 class="card-title">النسخة الذهبية VIP</h3>
+                
+                <div class="exclusive-badge">
+                    <i class="fas fa-star"></i>
+                    نسخة حصرية للمطور
+                </div>
+
+                <p class="card-desc">
+                    التجربة المطلقة! نسخة VIP الحصرية تمنحك كل المميزات الممكنة مع حماية قصوى ضد الحظر. العب بقوة وحشية دون أي قيود.
+                </p>
+                
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> حماية قاطعة ضد الباند</li>
+                    <li><i class="fas fa-check-circle"></i> جميع المميزات مفعلة</li>
+                    <li><i class="fas fa-check-circle"></i> أداء خارق بدون مشاكل</li>
+                    <li><i class="fas fa-check-circle"></i> دعم فوري ومباشر</li>
+                    <li><i class="fas fa-check-circle"></i> تحديثات أولية حصرية</li>
+                </ul>
+
+                <button class="download-btn">
+                    <i class="fas fa-crown"></i>
+                    الحصول على النسخة الذهبية
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Normal Version Modal -->
+    <div class="modal-overlay" id="normalModal">
+        <div class="modal">
+            <button class="close-modal" onclick="closeModal('normalModal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <i class="fas fa-shield-alt modal-icon" style="color: var(--success);"></i>
+            <h3>تأكيد التحميل</h3>
+            <p>
+                أنت على وشك تحميل النسخة العادية. تذكر دائماً: <strong>اللعب بذكاء</strong> هو مفتاح الأمان. تجنب التصرفات المبالغ فيها لضمان استمرارية حسابك.
+            </p>
+            <div class="modal-actions">
+                <a href="https://drive.usercontent.google.com/download?id=1_YT88-zdTmnn8nKkt2UG4hu4Oag61GWv&export=download&authuser=1" 
+                   class="modal-btn modal-btn-primary" target="_blank">
+                    <i class="fas fa-download"></i>
+                    ابدأ التحميل الآن
+                </a>
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('normalModal')">
+                    تراجع
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIP Version Modal -->
+    <div class="modal-overlay" id="vipModal">
+        <div class="modal" style="border-color: rgba(255,215,0,0.3);">
+            <button class="close-modal" onclick="closeModal('vipModal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <i class="fas fa-crown modal-icon" style="color: var(--gold);"></i>
+            <h3 style="color: var(--gold);">النسخة الذهبية VIP</h3>
+            <p>
+                نسخة حصرية مخصصة للمحترفين فقط! تتمتع بـ <strong>حماية قاطعة ضد الحظر</strong> وجميع المميزات الممكنة. العب بحريّة مطلقة دون أي قيود أو مخاوف.
+            </p>
+            <div class="modal-actions">
+                <a href="https://www.instagram.com/txyit?igsh=MTVtODU0ZTQ0bGlxbg==" 
+                   class="modal-btn modal-btn-primary" target="_blank" 
+                   style="background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--dark);">
+                    <i class="fab fa-instagram"></i>
+                    تواصل معي على الانستقرام
+                </a>
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('vipModal')">
+                    لاحقاً
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>صنع بحب <span class="heart">❤</span> بواسطة HAMZA | TXYIT</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">جميع الحقوق محفوظة © 2026</p>
+    </footer>
+
+    <script>
+        // Create particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particle.style.width = particle.style.height = (Math.random() * 4 + 2) + 'px';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Modal functions
+        function openNormalModal() {
+            document.getElementById('normalModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openVipModal() {
+            document.getElementById('vipModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay.active').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Add hover sound effect (optional - visual feedback)
+        document.querySelectorAll('.version-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
